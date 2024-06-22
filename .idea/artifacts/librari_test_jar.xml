@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="librari_test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/librari_test_jar</output-path>
+    <root id="archive" name="librari_test.jar">
+      <element id="module-output" name="librari_test" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.19.4/protobuf-java-3.19.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.30/mysql-connector-java-8.0.30.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/Manifest.txt" />
+    </root>
+  </artifact>
+</component>

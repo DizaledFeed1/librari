@@ -199,11 +199,19 @@ public class Main {
     }
     private static void returnBook(int borrowingId){
         query = "update books set available = 1 where book_id = ? ";
+        java.util.Date currentDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
 
         try {
             preparedStatement = con.prepareStatement(query);
 
             preparedStatement.setInt(1,borrowingId);
+            preparedStatement.executeUpdate();
+
+            query = "update borrowings set return_date = ? where borrowing_id = ?";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setDate(1,sqlDate);
+            preparedStatement.setInt(2,borrowingId);
             preparedStatement.executeUpdate();
 
             con.commit();
@@ -212,7 +220,7 @@ public class Main {
         }
     }
     private static void getAllBorrowings(){
-        query = "select * from books where available = 1";
+        query = "select * from books where available = 0";
 
         try {
             preparedStatement = con.prepareStatement(query);
@@ -225,8 +233,9 @@ public class Main {
                 int pages = resultSet.getInt("pages");
                 int available = resultSet.getInt("available");
 
-                System.out.println("Book ID: " + id + ", Title: " + title + ", Author: " + author + ", Pages: " + pages + ", Available: " + available + "\n\n");
+                System.out.println("Book ID: " + id + ", Title: " + title + ", Author: " + author + ", Pages: " + pages + ", Available: " + available );
             }
+            System.out.println("\n\n");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
